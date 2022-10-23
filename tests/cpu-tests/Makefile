@@ -9,6 +9,8 @@ COLOR_NONE  = \033[0m
 
 # MODE only has two options: 1. ASSERT 2. otherwise
 MODE ?= 
+# WALL has two options: 1. TRUE 2. otherwise
+WALL ?= 
 
 ALL = $(basename $(notdir $(shell find tests/. -name "*.c")))
 
@@ -18,7 +20,7 @@ all: $(addprefix Makefile., $(ALL))
 $(ALL): %: Makefile.%
 
 Makefile.%: tests/%.c latest
-	@/bin/echo -e "MODE = $(MODE)\nNAME = $*\nSRCS = $<\nLIBS += klib\ninclude $${AM_HOME}/Makefile" > $@
+	@/bin/echo -e "WALL = $(WALL)\nMODE = $(MODE)\nNAME = $*\nSRCS = $<\nLIBS += klib\ninclude $${AM_HOME}/Makefile" > $@
 	@if make -s -f $@ ARCH=$(ARCH) $(MAKECMDGOALS); then \
 		printf "[%14s] $(COLOR_GREEN)PASS!$(COLOR_NONE)\n" $* >> $(RESULT); \
 	else \
