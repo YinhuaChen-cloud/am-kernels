@@ -36,6 +36,8 @@ run: all
 
 gdb: all
 
+sdb: all
+
 clean:
 	rm -rf Makefile.* build/
 
