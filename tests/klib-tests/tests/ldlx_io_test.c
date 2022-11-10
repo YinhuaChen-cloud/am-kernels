@@ -22,8 +22,6 @@ int main() {
 	const char *s3 = "%ld + %ld = %ld";
 	const char *s4 = "\t5\t7\t%s\t8\n";
 	const char *s5 = "0x%lx";
-	const char *s6 = "0x%lx";
-	const char *s7 = "0x%lx";
 
 	sprintf(buf, s2, 0x1234567800000000, 0x0000000012345678, 0x1234567812345678);
 	assert(strcmp(buf, "The equation is 0x1234567800000000 + 0x12345678 = 0x1234567812345678 Good!") == 0);
@@ -45,15 +43,19 @@ int main() {
 	uint64_t a1 = 0xdeadbeaf12345678;
 	uint64_t a2 = 0x1234567812345678;
 	uint64_t a3 = 0xdeadbeafdeadbeef;
+	uint64_t a4 = 0xffffffffffffffff;
 
 	sprintf(buf, s5, a1);
 	assert(strcmp(buf, "0xdeadbeaf12345678") == 0);
 
-	sprintf(buf, s6, a2);
+	sprintf(buf, s5, a2);
 	assert(strcmp(buf, "0x1234567812345678") == 0);
 
-	sprintf(buf, s7, a3);
+	sprintf(buf, s5, a3);
 	assert(strcmp(buf, "0xdeadbeafdeadbeef") == 0);
+
+	sprintf(buf, s5, a4);
+	assert(strcmp(buf, "0xffffffffffffffff") == 0);
 
 	return 0;
 }
